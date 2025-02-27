@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realistic Fingerprint & Eye Contact Scan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .biometric-section {
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #4CAF50;
+        }
+
+        /* Fingerprint Scanner Styling */
+        #handPlacement {
+            display: none;
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: #ff5722;
+        }
+
+        #scanner {
+            width: 100%;
+            height: 200px;
+            background-color: #dcdcdc;
+            margin: 20px 0;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #scanProgress {
+            background-color: #4CAF50;
+            height: 100%;
+            width: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: width 3s linear;
+        }
+
+        /* Eye Contact Scanner Styling */
+        #eyeScanner {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        #pupil {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            background-color: #000;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.7;
+            }
+        }
+
+        #eyeContactResult {
+            font-size: 1.2rem;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Realistic Fingerprint & Eye Contact Scan</h1>
+
+        <!-- Fake Fingerprint Section -->
+        <section class="biometric-section">
+            <h2>Step 1: Place Your Finger on the Screen</h2>
+            <p id="handPlacement">Place your finger on the screen to scan...</p>
+            <div id="scanner">
+                <div id="scanProgress"></div>
+            </div>
+            <button id="fingerprintButton">Start Fingerprint Scan</button>
+            <p id="fingerprintResult"></p>
+        </section>
+
+        <!-- Fake Eye Contact Section -->
+        <section class="biometric-section">
+            <h2>Step 2: Look at the Screen for Eye Contact Scan</h2>
+            <div id="eyeScanner">
+                <div id="pupil"></div>
+            </div>
+            <button id="eyeContactButton">Start Eye Contact Scan</button>
+            <p id="eyeContactResult"></p>
+        </section>
+    </div>
+
+    <script>
+        // Fingerprint Scan Simulation
+        document.getElementById('fingerprintButton').addEventListener('click', function() {
+            const handPlacement = document.getElementById('handPlacement');
+            const fingerprintResult = document.getElementById('fingerprintResult');
+            const scanProgress = document.getElementById('scanProgress');
+            
+            // Show the "Place your finger" message
+            handPlacement.style.display = 'block';
+
+            // Start the fake scanning process
+            setTimeout(() => {
+                // Start filling the scanning progress
+                scanProgress.style.width = '100%';
+                
+                // Simulate a successful fingerprint capture after the "scan"
+                setTimeout(() => {
+                    fingerprintResult.textContent = "Fingerprint captured successfully! ✅";
+                    handPlacement.style.display = 'none'; // Hide the hand placement message
+                    scanProgress.style.width = '0'; // Reset the scanning progress
+                }, 3000); // After 3 seconds, show success message
+            }, 500); // Simulate a delay before scanning starts
+        });
+
+        // Eye Contact Scan Simulation
+        document.getElementById('eyeContactButton').addEventListener('click', function() {
+            const eyeContactResult = document.getElementById('eyeContactResult');
+            const pupil = document.getElementById('pupil');
+            
+            // Start eye contact scan animation
+            pupil.style.animation = 'pulse 1.5s infinite'; // Add pulsing effect to simulate scan
+            
+            // Simulate eye contact print capture process
+            setTimeout(() => {
+                eyeContactResult.textContent = "Eye contact print captured successfully! ✅";
+                pupil.style.animation = ''; // Stop the pulse animation after scan
+            }, 5000); // Simulate the eye contact scan process taking 5 seconds
+        });
+    </script>
+</body>
+</html>
+
